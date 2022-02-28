@@ -1,10 +1,7 @@
 package by.innowise.monolithwebcalculator.service;
 
 import by.innowise.monolithwebcalculator.domain.operation.Operation;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,63 +9,55 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CalculatorServiceTest {
 
-    static CalculatorService calculatorService;
-    Random r;
+    private CalculatorService calculatorService;
+    private Random r;
+    private double argOne;
+    private double argTwo;
 
     @BeforeAll
-    static void setUp() {
+    void setUp() {
         calculatorService = new CalculatorService();
     }
 
     @BeforeEach
     void beforeEach() {
         r = new Random();
+        argOne = r.nextDouble() * 100;
+        double tmp = r.nextDouble() * 100;
+        argTwo = tmp == 0 ? 1 : tmp;
     }
 
-    @Test
+    @RepeatedTest(10)
     void sumTest() {
-        for (int i = 0; i < 10; i++) {
-            double argOne = r.nextDouble() * i * 10;
-            double argTwo = r.nextDouble() * i * 10;
-            double res = argOne + argTwo;
-            Assertions.assertEquals(res, calculatorService.sum(Operation.builder().argOne(argOne).argTwo(argTwo).build()).getResult());
-        }
+        double res = argOne + argTwo;
+        Assertions.assertEquals(res, calculatorService.sum(Operation.builder().argOne(argOne).argTwo(argTwo).build()).getResult());
     }
 
-    @Test
+    @RepeatedTest(10)
     void subTest() {
-        for (int i = 0; i < 10; i++) {
-            double argOne = r.nextDouble() * i * 10;
-            double argTwo = r.nextDouble() * i * 10;
-            double res = argOne - argTwo;
-            Assertions.assertEquals(res, calculatorService.sub(Operation.builder().argOne(argOne).argTwo(argTwo).build()).getResult());
-        }
+
+        double res = argOne - argTwo;
+        Assertions.assertEquals(res, calculatorService.sub(Operation.builder().argOne(argOne).argTwo(argTwo).build()).getResult());
+
     }
 
-    @Test
+    @RepeatedTest(10)
     void mulTest() {
-        for (int i = 0; i < 10; i++) {
-            double argOne = r.nextDouble() * i * 10;
-            double argTwo = r.nextDouble() * i * 10;
-            double res = argOne * argTwo;
-            Assertions.assertEquals(res, calculatorService.mul(Operation.builder().argOne(argOne).argTwo(argTwo).build()).getResult());
-        }
+        double res = argOne * argTwo;
+        Assertions.assertEquals(res, calculatorService.mul(Operation.builder().argOne(argOne).argTwo(argTwo).build()).getResult());
+    }
+
+    @RepeatedTest(10)
+    void divTest() {
+        double res = argOne / argTwo;
+        Assertions.assertEquals(res, calculatorService.div(Operation.builder().argOne(argOne).argTwo(argTwo).build()).getResult());
     }
 
     @Test
-    void divTest() {
-        for (int i = 0; i < 10; i++) {
-            double argOne = r.nextDouble() * i * 10;
-            double argTwo = r.nextDouble() * i * 10;
-            if (argTwo == 0) {
-                assertThrows(IllegalArgumentException.class, () -> calculatorService.div(Operation.builder().argOne(argOne).argTwo(argTwo).build()));
-            } else {
-                double res = argOne / argTwo;
-                Assertions.assertEquals(res, calculatorService.div(Operation.builder().argOne(argOne).argTwo(argTwo).build()).getResult());
-            }
-
-        }
+    void expectExceptionWhileDividingByZeroTest() {
+        assertThrows(IllegalArgumentException.class, () -> calculatorService.div(Operation.builder().argOne(10).argTwo(0).build()));
     }
 }

@@ -3,7 +3,8 @@ package by.innowise.monolithwebcalculator.web.controller;
 import by.innowise.monolithwebcalculator.domain.mapper.OperationMapper;
 import by.innowise.monolithwebcalculator.domain.operation.Operation;
 import by.innowise.monolithwebcalculator.service.CalculatorService;
-import by.innowise.monolithwebcalculator.web.dto.OperationDto;
+import by.innowise.monolithwebcalculator.web.dto.OperationRequestDto;
+import by.innowise.monolithwebcalculator.web.dto.OperationResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,27 +22,27 @@ public class CalculatorController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<OperationDto> add(@RequestBody OperationDto operationDto) {
-        Operation op = calculatorService.sum(operationMapper.mapOperationDtoToOperation(operationDto));
-        return new ResponseEntity<>(operationMapper.mapOperationToOperationDto(op), HttpStatus.OK);
+    public ResponseEntity<OperationResponseDto> add(@RequestBody OperationRequestDto operationRequestDto) {
+        Operation op = calculatorService.sum(operationMapper.mapOperationRequestDtoToOperation(operationRequestDto));
+        return new ResponseEntity<>(operationMapper.mapOperationToOperationResponseDto(op), HttpStatus.OK);
     }
 
     @PostMapping("/mul")
-    public ResponseEntity<OperationDto> multiply(@RequestBody OperationDto operationDto) {
-        Operation op = calculatorService.mul(operationMapper.mapOperationDtoToOperation(operationDto));
-        return new ResponseEntity<>(operationMapper.mapOperationToOperationDto(op), HttpStatus.OK);
+    public ResponseEntity<OperationResponseDto> multiply(@RequestBody OperationRequestDto operationRequestDto) {
+        Operation op = calculatorService.mul(operationMapper.mapOperationRequestDtoToOperation(operationRequestDto));
+        return new ResponseEntity<>(operationMapper.mapOperationToOperationResponseDto(op), HttpStatus.OK);
     }
 
     @PostMapping("/sub")
-    public ResponseEntity<OperationDto> subtract(@RequestBody OperationDto operationDto) {
-        Operation op = calculatorService.sub(operationMapper.mapOperationDtoToOperation(operationDto));
-        return new ResponseEntity<>(operationMapper.mapOperationToOperationDto(op), HttpStatus.OK);
+    public ResponseEntity<OperationResponseDto> subtract(@RequestBody OperationRequestDto operationRequestDto) {
+        Operation op = calculatorService.sub(operationMapper.mapOperationRequestDtoToOperation(operationRequestDto));
+        return new ResponseEntity<>(operationMapper.mapOperationToOperationResponseDto(op), HttpStatus.OK);
     }
 
     @PostMapping("/div")
-    public ResponseEntity<OperationDto> divide(@RequestBody OperationDto operationDto) {
-        Operation op = calculatorService.div(operationMapper.mapOperationDtoToOperation(operationDto));
-        return new ResponseEntity<>(operationMapper.mapOperationToOperationDto(op), HttpStatus.OK);
+    public ResponseEntity<OperationResponseDto> divide(@RequestBody OperationRequestDto operationRequestDto) {
+        Operation op = calculatorService.div(operationMapper.mapOperationRequestDtoToOperation(operationRequestDto));
+        return new ResponseEntity<>(operationMapper.mapOperationToOperationResponseDto(op), HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

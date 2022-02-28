@@ -2,7 +2,8 @@ package by.innowise.monolithwebcalculator.domain.mapper;
 
 import by.innowise.monolithwebcalculator.domain.operation.Operation;
 import by.innowise.monolithwebcalculator.domain.operation.OperationType;
-import by.innowise.monolithwebcalculator.web.dto.OperationDto;
+import by.innowise.monolithwebcalculator.web.dto.OperationRequestDto;
+import by.innowise.monolithwebcalculator.web.dto.OperationResponseDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class OperationMapperTest {
 
@@ -32,22 +31,20 @@ class OperationMapperTest {
     }
 
     @Test
-    void mapOperationDtoToOperationTest() {
+    void mapOperationRequestDtoToOperationTest() {
         for (int i = 0; i < 20; i++) {
 
             double argOne = r.nextDouble();
             double argTwo = r.nextDouble();
             double res = r.nextDouble();
 
-            OperationDto dto = new OperationDto();
+            OperationRequestDto dto = new OperationRequestDto();
             dto.setArgOne(argOne);
             dto.setArgTwo(argTwo);
-            dto.setResult(res);
 
-            Operation mappedOp = mapper.mapOperationDtoToOperation(dto);
+            Operation mappedOp = mapper.mapOperationRequestDtoToOperation(dto);
             Assertions.assertEquals(argOne, mappedOp.getArgOne());
             Assertions.assertEquals(argTwo, mappedOp.getArgTwo());
-            Assertions.assertEquals(res, mappedOp.getResult());
         }
     }
 
@@ -61,7 +58,7 @@ class OperationMapperTest {
             OperationType type = operationTypes.get(r.nextInt(operationTypes.size()));
             Operation op = new Operation(argOne, argTwo, res, type);
 
-            OperationDto mappedOpDto = mapper.mapOperationToOperationDto(op);
+            OperationResponseDto mappedOpDto = mapper.mapOperationToOperationResponseDto(op);
             Assertions.assertEquals(argOne, mappedOpDto.getArgOne());
             Assertions.assertEquals(argTwo, mappedOpDto.getArgTwo());
             Assertions.assertEquals(res, mappedOpDto.getResult());
