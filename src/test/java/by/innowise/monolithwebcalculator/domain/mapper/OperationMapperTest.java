@@ -8,21 +8,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.mapstruct.factory.Mappers;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 class OperationMapperTest {
 
-    static OperationMapper mapper;
+    static OperationMapper operationMapper;
     static List<OperationType> operationTypes;
     Random r;
 
     @BeforeAll
     static void setUp() {
-        mapper = new OperationMapper();
         operationTypes = Arrays.asList(OperationType.values());
+        operationMapper = Mappers.getMapper(OperationMapper.class);
     }
 
     @BeforeEach
@@ -42,7 +42,7 @@ class OperationMapperTest {
             dto.setArgOne(argOne);
             dto.setArgTwo(argTwo);
 
-            Operation mappedOp = mapper.mapOperationRequestDtoToOperation(dto);
+            Operation mappedOp = operationMapper.mapOperationRequestDtoToOperation(dto);
             Assertions.assertEquals(argOne, mappedOp.getArgOne());
             Assertions.assertEquals(argTwo, mappedOp.getArgTwo());
         }
@@ -58,7 +58,7 @@ class OperationMapperTest {
             OperationType type = operationTypes.get(r.nextInt(operationTypes.size()));
             Operation op = new Operation(argOne, argTwo, res, type);
 
-            OperationResponseDto mappedOpDto = mapper.mapOperationToOperationResponseDto(op);
+            OperationResponseDto mappedOpDto = operationMapper.mapOperationToOperationResponseDto(op);
             Assertions.assertEquals(argOne, mappedOpDto.getArgOne());
             Assertions.assertEquals(argTwo, mappedOpDto.getArgTwo());
             Assertions.assertEquals(res, mappedOpDto.getResult());

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/calc")
 public class CalculatorController {
 
-    private CalculatorService calculatorService;
-    private OperationMapper operationMapper;
+    private final CalculatorService calculatorService;
+    private final OperationMapper operationMapper;
 
     public CalculatorController(CalculatorService calculatorService, OperationMapper operationMapper) {
         this.calculatorService = calculatorService;
