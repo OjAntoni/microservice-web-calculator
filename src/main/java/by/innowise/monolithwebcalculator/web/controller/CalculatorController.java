@@ -2,6 +2,7 @@ package by.innowise.monolithwebcalculator.web.controller;
 
 import by.innowise.monolithwebcalculator.domain.mapper.OperationMapper;
 import by.innowise.monolithwebcalculator.domain.operation.Operation;
+import by.innowise.monolithwebcalculator.domain.operation.OperationType;
 import by.innowise.monolithwebcalculator.service.CalculatorService;
 import by.innowise.monolithwebcalculator.web.dto.OperationRequestDto;
 import by.innowise.monolithwebcalculator.web.dto.OperationResponseDto;

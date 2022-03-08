@@ -4,15 +4,13 @@ import by.innowise.monolithwebcalculator.domain.operation.Operation;
 import by.innowise.monolithwebcalculator.domain.operation.OperationType;
 import by.innowise.monolithwebcalculator.web.dto.OperationRequestDto;
 import by.innowise.monolithwebcalculator.web.dto.OperationResponseDto;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mapstruct.factory.Mappers;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class OperationMapperTest {
 
     static OperationMapper operationMapper;
