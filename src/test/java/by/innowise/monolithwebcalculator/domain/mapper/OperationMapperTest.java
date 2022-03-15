@@ -13,12 +13,12 @@ import java.util.Random;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class OperationMapperTest {
 
-    static OperationMapper operationMapper;
-    static List<OperationType> operationTypes;
+    OperationMapper operationMapper;
+    List<OperationType> operationTypes;
     Random r;
 
     @BeforeAll
-    static void setUp() {
+    void setUp() {
         operationTypes = Arrays.asList(OperationType.values());
         operationMapper = Mappers.getMapper(OperationMapper.class);
     }
@@ -34,7 +34,6 @@ class OperationMapperTest {
 
             double argOne = r.nextDouble();
             double argTwo = r.nextDouble();
-            double res = r.nextDouble();
 
             OperationRequestDto dto = new OperationRequestDto();
             dto.setArgOne(argOne);

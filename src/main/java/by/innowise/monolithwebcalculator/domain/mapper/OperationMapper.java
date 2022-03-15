@@ -10,8 +10,8 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 public interface OperationMapper {
     @Mappings({
-            @Mapping(target = "argOne", source = "dto.argOne"),
-            @Mapping(target = "argTwo", source = "dto.argTwo"),
+            @Mapping(target = "argOne", source = "argOne"),
+            @Mapping(target = "argTwo", source = "argTwo"),
     })
     Operation mapOperationRequestDtoToOperation(OperationRequestDto dto);
     @Mappings({
