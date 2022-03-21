@@ -2,6 +2,7 @@ package by.innowise.monolithwebcalculator.web.controller;
 
 import by.innowise.monolithwebcalculator.domain.mapper.OperationMapper;
 import by.innowise.monolithwebcalculator.domain.operation.Operation;
+import by.innowise.monolithwebcalculator.domain.operation.OperationType;
 import by.innowise.monolithwebcalculator.service.CalculatorService;
 import by.innowise.monolithwebcalculator.web.dto.OperationRequestDto;
 import by.innowise.monolithwebcalculator.web.dto.OperationResponseDto;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/calc")
 public class CalculatorController {
 
-    private CalculatorService calculatorService;
-    private OperationMapper operationMapper;
+    private final CalculatorService calculatorService;
+    private final OperationMapper operationMapper;
 
     public CalculatorController(CalculatorService calculatorService, OperationMapper operationMapper) {
         this.calculatorService = calculatorService;

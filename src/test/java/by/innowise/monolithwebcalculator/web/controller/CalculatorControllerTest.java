@@ -3,10 +3,13 @@ package by.innowise.monolithwebcalculator.web.controller;
 import by.innowise.monolithwebcalculator.domain.mapper.OperationMapper;
 import by.innowise.monolithwebcalculator.domain.operation.Operation;
 import by.innowise.monolithwebcalculator.domain.operation.OperationType;
+import by.innowise.monolithwebcalculator.repository.OperationRepository;
 import by.innowise.monolithwebcalculator.service.CalculatorService;
 import by.innowise.monolithwebcalculator.web.dto.OperationResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -25,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(CalculatorController.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CalculatorControllerTest {
 
     @Autowired
@@ -34,7 +38,14 @@ class CalculatorControllerTest {
     @MockBean
     CalculatorService calculatorService;
     @MockBean
+    OperationRepository operationRepository;
+    @MockBean
     OperationMapper operationMapper;
+
+    @BeforeAll
+    void setUp(){
+        Mockito.when(operationRepository.save(any())).thenReturn(null);
+    }
 
     @Test
     void add() throws Exception {
