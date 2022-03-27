@@ -5,7 +5,9 @@ import by.innowise.monolithwebcalculator.domain.operation.OperationType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface OperationRepository extends JpaRepository<Operation, Long> {
+import java.util.UUID;
+
+public interface OperationRepository extends JpaRepository<Operation, UUID> {
     @Query(name = "Operation.mostPopular")
     OperationType findMostPopular();
 }
