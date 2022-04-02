@@ -1,13 +1,19 @@
 package by.innowise.monolithwebcalculator.service;
 
 import by.innowise.monolithwebcalculator.domain.operation.Operation;
+import by.innowise.monolithwebcalculator.domain.operation.DefaultOperationConstants;
 import by.innowise.monolithwebcalculator.domain.operation.OperationType;
 import by.innowise.monolithwebcalculator.repository.OperationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
+@CacheConfig(cacheNames = "operations")
 public class CalculatorService {
 
     private final OperationRepository operationRepository;
@@ -54,5 +60,20 @@ public class CalculatorService {
     @Transactional
     public OperationType findMostPopularOperation(){
         return operationRepository.findMostPopular();
+    }
+
+    @Transactional
+    @Cacheable(value = "operations")
+    public Operation getById(UUID uuid){
+        return Optional.ofNullable(operationRepository.getOperationById(uuid)).orElseGet(this::getDefaultOperation);
+    }
+
+    public Operation getDefaultOperation(){
+        return Operation.builder()
+                .argOne(DefaultOperationConstants.ARG_ONE)
+                .argTwo(DefaultOperationConstants.ARG_TWO)
+                .result(DefaultOperationConstants.RESULT)
+                .operationType(DefaultOperationConstants.OPERATION_TYPE)
+                .build();
     }
 }
