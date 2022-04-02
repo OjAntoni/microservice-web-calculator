@@ -1,9 +1,13 @@
 package by.innowise.monolithwebcalculator.domain.operation;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor @NoArgsConstructor
@@ -12,12 +16,14 @@ import java.util.UUID;
 @Entity
 @Table(name = "operations")
 @NamedNativeQuery(name = "Operation.mostPopular", query = "select max(x.type) from (select type, count(operations.type) from operations group by operations.type) as x")
-public class Operation {
+public class Operation implements Serializable{
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name ="uuid",
     strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
+    @CreationTimestamp
+    private LocalDateTime creationDateTime;
     private double argOne;
     private double argTwo;
     private double result;
