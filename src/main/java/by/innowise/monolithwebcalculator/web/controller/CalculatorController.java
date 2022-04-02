@@ -6,7 +6,6 @@ import by.innowise.monolithwebcalculator.domain.operation.OperationType;
 import by.innowise.monolithwebcalculator.service.CalculatorService;
 import by.innowise.monolithwebcalculator.web.dto.OperationRequestDto;
 import by.innowise.monolithwebcalculator.web.dto.OperationResponseDto;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,8 +43,7 @@ public class CalculatorController {
     @PostMapping("/div")
     public ResponseEntity<OperationResponseDto> divide(@RequestBody OperationRequestDto operationRequestDto) {
         Operation op = calculatorService.div(operationMapper.mapOperationRequestDtoToOperation(operationRequestDto));
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(operationMapper.mapOperationToOperationResponseDto(op), headers, HttpStatus.OK);
+        return new ResponseEntity<>(operationMapper.mapOperationToOperationResponseDto(op), HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

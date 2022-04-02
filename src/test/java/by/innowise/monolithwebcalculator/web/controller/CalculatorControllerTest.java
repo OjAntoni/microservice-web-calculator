@@ -50,7 +50,7 @@ class CalculatorControllerTest {
     @Test
     void add() throws Exception {
         Mockito.when(calculatorService.sum(Mockito.any())).thenReturn(new Operation(6, 6, 12, OperationType.ADD));
-        Mockito.when(operationMapper.mapOperationToOperationResponseDto(any())).thenReturn(new OperationResponseDto(null, 6, 6, 12, OperationType.ADD));
+        Mockito.when(operationMapper.mapOperationToOperationResponseDto(any())).thenReturn(new OperationResponseDto(6, 6, 12, OperationType.ADD));
 
         testApiCall("add", 12, OperationType.ADD);
     }
@@ -58,7 +58,7 @@ class CalculatorControllerTest {
     @Test
     void multiply() throws Exception {
         Mockito.when(calculatorService.mul(Mockito.any())).thenReturn(new Operation(6, 6, 36, OperationType.MULTIPLY));
-        Mockito.when(operationMapper.mapOperationToOperationResponseDto(any())).thenReturn(new OperationResponseDto(null, 6, 6, 36, OperationType.MULTIPLY));
+        Mockito.when(operationMapper.mapOperationToOperationResponseDto(any())).thenReturn(new OperationResponseDto(6, 6, 36, OperationType.MULTIPLY));
 
         testApiCall("mul", 36, OperationType.MULTIPLY);
     }
@@ -66,7 +66,7 @@ class CalculatorControllerTest {
     @Test
     void subtract() throws Exception {
         Mockito.when(calculatorService.sub(Mockito.any())).thenReturn(new Operation(6, 6, 0, OperationType.SUBTRACT));
-        Mockito.when(operationMapper.mapOperationToOperationResponseDto(any())).thenReturn(new OperationResponseDto(null, 6, 6, 0, OperationType.SUBTRACT));
+        Mockito.when(operationMapper.mapOperationToOperationResponseDto(any())).thenReturn(new OperationResponseDto(6, 6, 0, OperationType.SUBTRACT));
 
         testApiCall("sub", 0, OperationType.SUBTRACT);
     }
@@ -74,7 +74,7 @@ class CalculatorControllerTest {
     @Test
     void divide() throws Exception {
         Mockito.when(calculatorService.div(Mockito.any())).thenReturn(new Operation(6, 6, 1, OperationType.DIVIDE));
-        Mockito.when(operationMapper.mapOperationToOperationResponseDto(any())).thenReturn(new OperationResponseDto(null, 6, 6, 1, OperationType.DIVIDE));
+        Mockito.when(operationMapper.mapOperationToOperationResponseDto(any())).thenReturn(new OperationResponseDto(6, 6, 1, OperationType.DIVIDE));
 
         testApiCall("div", 1, OperationType.DIVIDE);
     }
@@ -83,7 +83,7 @@ class CalculatorControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/calc/" + endpoint)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(new OperationResponseDto(null, 6, 6, 0, type))))
+                        .content(objectMapper.writeValueAsString(new OperationResponseDto(6, 6, 0, type))))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.argOne").value(6))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.argTwo").value(6))
