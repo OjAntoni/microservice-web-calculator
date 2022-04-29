@@ -24,4 +24,10 @@ public interface OperationMapper {
             @Mapping(target = "uuid", source = "id")
     })
     OperationResponseDto mapOperationToOperationResponseDto(Operation op);
+
+    @Mappings({
+            @Mapping(target ="argOne", source = "argOne"),
+            @Mapping(target ="argTwo", source = "argTwo")
+    })
+    OperationRequestDto mapOperationToOperationRequestDto(Operation op);
 }

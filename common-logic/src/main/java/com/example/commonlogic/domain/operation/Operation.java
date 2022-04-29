@@ -26,7 +26,7 @@ public class Operation implements Serializable{
     private double argOne;
     private double argTwo;
     private double result;
-    @Column(name = "type", nullable = false)
+    @Column(name = "type")
     private OperationType operationType;
 
     public Operation(double argOne, double argTwo, double result, OperationType operationType) {

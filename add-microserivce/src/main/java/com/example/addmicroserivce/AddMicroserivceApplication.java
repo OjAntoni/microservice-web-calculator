@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan({"com.example.addmicroserivce","com.example.commonlogic"})
+@ComponentScan({"com.example.addmicroserivce", "com.example.commonlogic"})
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 public class AddMicroserivceApplication {
 

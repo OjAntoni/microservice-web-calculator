@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 @ComponentScan({"com.example.calculator.*","com.example.commonlogic.*"})
 @EntityScan("com.example.commonlogic.*")
 @SpringBootApplication
-@ConfigurationPropertiesScan("com.example.calculator.util")
+@ConfigurationPropertiesScan({"com.example.calculator.util","com.example.commonlogic"})
 public class CalculatorApplication {
 
     public static void main(String[] args) {
