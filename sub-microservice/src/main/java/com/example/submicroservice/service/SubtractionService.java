@@ -9,7 +9,7 @@ public class SubtractionService {
     public Operation calc(Operation op){
         return Operation.builder()
                 .argOne(op.getArgOne())
-                .argTwo(op.getArgOne())
+                .argTwo(op.getArgTwo())
                 .operationType(OperationType.SUBTRACT)
                 .result(op.getArgOne()-op.getArgTwo())
                 .build();

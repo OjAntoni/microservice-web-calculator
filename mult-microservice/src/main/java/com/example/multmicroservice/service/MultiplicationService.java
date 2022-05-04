@@ -10,7 +10,7 @@ public class MultiplicationService {
     public Operation calc(Operation op){
         return Operation.builder()
                 .argOne(op.getArgOne())
-                .argTwo(op.getArgOne())
+                .argTwo(op.getArgTwo())
                 .operationType(OperationType.MULTIPLY)
                 .result(op.getArgOne()*op.getArgTwo())
                 .build();

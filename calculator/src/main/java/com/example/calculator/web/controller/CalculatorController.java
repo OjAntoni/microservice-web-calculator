@@ -1,10 +1,8 @@
 package com.example.calculator.web.controller;
 
 import com.example.calculator.service.CalculatorService;
-import com.example.calculator.util.MicroservicesConnectionProperties;
 import com.example.commonlogic.domain.mapper.OperationMapper;
 import com.example.commonlogic.domain.operation.Operation;
-import com.example.commonlogic.domain.operation.OperationType;
 import com.example.commonlogic.web.dto.OperationRequestDto;
 import com.example.commonlogic.web.dto.OperationResponseDto;
 import org.springframework.http.HttpStatus;
@@ -24,7 +22,7 @@ public class CalculatorController {
 
     @PostMapping("/{type}")
     public ResponseEntity<OperationResponseDto> calc(@RequestBody OperationRequestDto operationRequestDto, @PathVariable String type) {
-        Operation response = service.requestAndGetOperation(mapper.mapOperationRequestDtoToOperation(operationRequestDto), OperationType.valueOf(type));
+        Operation response = service.requestAndGetOperation(mapper.mapOperationRequestDtoToOperation(operationRequestDto), type);
         return new ResponseEntity<>(mapper.mapOperationToOperationResponseDto(response), HttpStatus.OK);
     }
 

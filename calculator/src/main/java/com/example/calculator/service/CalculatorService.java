@@ -1,10 +1,9 @@
 package com.example.calculator.service;
 
 import com.example.calculator.aop.annotation.Persisting;
-import com.example.calculator.util.MicroservicesConnectionProperties;
+import com.example.calculator.util.properties.MicroserviceNetworkProperties;
 import com.example.commonlogic.domain.mapper.OperationMapper;
 import com.example.commonlogic.domain.operation.Operation;
-import com.example.commonlogic.domain.operation.OperationType;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -12,36 +11,33 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Service
 public class CalculatorService {
     private final OperationMapper mapper;
-    private final MicroservicesConnectionProperties microservicesConnectionProperties;
+    private final MicroserviceNetworkProperties prop;
 
-    public CalculatorService(OperationMapper mapper, MicroservicesConnectionProperties microservicesConnectionProperties) {
+    public CalculatorService(OperationMapper mapper, MicroserviceNetworkProperties prop) {
         this.mapper = mapper;
-        this.microservicesConnectionProperties = microservicesConnectionProperties;
+        this.prop = prop;
     }
 
     @Persisting
-    public Operation requestAndGetOperation(Operation op, OperationType type){
-        String path = "http://";
+    public Operation requestAndGetOperation(Operation op, String type){
+        String path = "";
         String uri = "";
-        switch (type.toString()) {
+        switch (type) {
             case "add":
-                path += microservicesConnectionProperties.getAdd().getHost() + ":";
-                path += microservicesConnectionProperties.getAdd().getPort();
+                path += prop.getADD_SERVICE_URI();
+                System.out.println(path);
                 uri = "/add";
                 break;
             case "sub":
-                path += microservicesConnectionProperties.getSub().getHost() + ":";
-                path += microservicesConnectionProperties.getSub().getPort();
+                path += prop.getSUB_SERVICE_URI();
                 uri = "/sub";
                 break;
             case "mult":
-                path += microservicesConnectionProperties.getMult().getHost() + ":";
-                path += microservicesConnectionProperties.getMult().getPort();
+                path += prop.getMULT_SERVICE_URI();
                 uri = "/mult";
                 break;
             case "div":
-                path += microservicesConnectionProperties.getDiv().getHost() + ":";
-                path += microservicesConnectionProperties.getDiv().getPort();
+                path += prop.getDIV_SERVICE_URI();
                 uri = "/div";
                 break;
         }

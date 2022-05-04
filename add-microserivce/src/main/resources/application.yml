@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: add-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        health-check-interval: 20s
+        health-check-timeout: 6s
