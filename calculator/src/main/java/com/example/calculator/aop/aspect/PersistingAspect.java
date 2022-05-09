@@ -3,7 +3,6 @@ package com.example.calculator.aop.aspect;
 import com.example.calculator.repository.OperationRepository;
 import com.example.commonlogic.domain.operation.Operation;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -19,10 +18,15 @@ public class PersistingAspect {
     }
 
     @Pointcut("@annotation(com.example.calculator.aop.annotation.Persisting)")
-    public void methodsTaggedWithPersisting(){}
+    public void methodsTaggedWithPersisting(){
+        //pointcut for methods which are annotated with @Persisting
+    }
+
 
     @Pointcut("execution(* *(com.example.commonlogic.domain.operation.Operation,..))")
-    public void methodsUsingOperationsAsArg(){}
+    public void methodsUsingOperationsAsArg(){
+        //pointcut for methods which use Operation entity as one of the arguments
+    }
 
     @Around(value = "methodsTaggedWithPersisting() && methodsUsingOperationsAsArg()")
     public Operation save(ProceedingJoinPoint jp) throws Throwable {
