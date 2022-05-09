@@ -5,8 +5,6 @@ import com.example.commonlogic.domain.operation.OperationType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AdditionServiceTest {
     private final AdditionService service = new AdditionService();
 
