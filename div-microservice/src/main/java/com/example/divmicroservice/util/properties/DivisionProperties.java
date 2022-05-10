@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 @RefreshScope
 @Getter @Setter
 public class DivisionProperties {
-    @Value("${precision}")
+    @Value("${precision:2}")
     private int precision;
 }

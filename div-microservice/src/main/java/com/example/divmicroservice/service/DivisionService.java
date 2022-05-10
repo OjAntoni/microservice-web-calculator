@@ -3,8 +3,6 @@ package com.example.divmicroservice.service;
 import com.example.commonlogic.domain.operation.Operation;
 import com.example.commonlogic.domain.operation.OperationType;
 import com.example.divmicroservice.util.properties.DivisionProperties;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

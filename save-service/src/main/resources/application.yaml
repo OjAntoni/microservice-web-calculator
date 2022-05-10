@@ -1,6 +1,8 @@
+server:
+  port: 8086
 spring:
   application:
-    name: calculator
+    name: save-service
   datasource:
     url: jdbc:postgresql://localhost:5432/innowise
     username: postgres
@@ -11,6 +13,12 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
     hibernate:
       ddl-auto: create-drop
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    packages:
+      trust-all: true
   cloud:
     consul:
       host: localhost
@@ -20,9 +28,3 @@ spring:
         health-check-timeout: 6s
       config:
         enabled: false
-  activemq:
-    broker-url: tcp://localhost:61616
-    user: admin
-    password: admin
-    packages:
-      trust-all: true
