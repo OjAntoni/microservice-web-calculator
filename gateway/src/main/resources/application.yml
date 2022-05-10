@@ -8,3 +8,7 @@ spring:
       discovery:
         health-check-interval: 5s
         health-check-timeout: 2s
+  config:
+    import: "consul:"
+server:
+  port: 7999
