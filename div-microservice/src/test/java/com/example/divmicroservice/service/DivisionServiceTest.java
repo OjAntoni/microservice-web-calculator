@@ -14,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DivisionServiceTest {
-    @MockBean
-    ConsulClient client;
     DivisionProperties properties;
     DivisionService service;
 
