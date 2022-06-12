@@ -27,4 +27,4 @@ spring:
     packages:
       trust-all: true
 server:
-  port: 8077
+  port: 8078
