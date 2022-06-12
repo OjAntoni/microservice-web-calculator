@@ -42,6 +42,9 @@ public class CalculatorService {
                 path += serviceUrl("div-service");
                 method = "/div";
                 break;
+            default:
+                path += serviceUrl("api-gateway");
+                break;
         }
         WebClient webClient = WebClient.create(path);
         return webClient.post().uri(method).accept(MediaType.APPLICATION_JSON)
@@ -54,7 +57,7 @@ public class CalculatorService {
 
     private String serviceUrl(String serviceId) {
         List<ServiceInstance> list = discoveryClient.getInstances(serviceId);
-        if (list != null && list.size() > 0 ) {
+        if (list != null && !list.isEmpty()) {
             return list.get(0).getUri().toString();
         }
         return null;

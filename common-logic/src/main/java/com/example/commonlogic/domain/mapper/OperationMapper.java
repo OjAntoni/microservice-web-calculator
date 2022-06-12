@@ -21,7 +21,6 @@ public interface OperationMapper {
             @Mapping(target = "argTwo", source = "argTwo"),
             @Mapping(target = "result", source = "result"),
             @Mapping(target = "type", source = "operationType"),
-            @Mapping(target = "uuid", source = "id")
     })
     OperationResponseDto mapOperationToOperationResponseDto(Operation op);
 

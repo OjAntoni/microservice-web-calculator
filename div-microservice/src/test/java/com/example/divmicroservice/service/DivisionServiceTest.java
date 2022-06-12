@@ -1,5 +1,6 @@
 package com.example.divmicroservice.service;
 
+import com.ecwid.consul.v1.ConsulClient;
 import com.example.commonlogic.domain.operation.Operation;
 import com.example.commonlogic.domain.operation.OperationType;
 import com.example.divmicroservice.util.properties.DivisionProperties;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 
