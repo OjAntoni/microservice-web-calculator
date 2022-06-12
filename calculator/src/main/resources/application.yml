@@ -26,3 +26,5 @@ spring:
     password: admin
     packages:
       trust-all: true
+server:
+  port: 8077
